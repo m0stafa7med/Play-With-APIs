@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //all apis here must be api auth
-Route::group(['middleware' => 'api','namespace'=>'Api'], function () {
+Route::group(['middleware' => ['api','checkPassword'],'namespace'=>'Api'], function () {
     Route::post('get-main-categories','CategoriesController@index');
 });
