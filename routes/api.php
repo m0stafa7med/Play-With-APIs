@@ -14,17 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//all apis here must be api auth
-Route::group(['middleware' => ['api','checkPassword','changeLanguage'],'namespace'=>'Api'], function () {
-    Route::post('get-main-categories','CategoriesController@index');
-    Route::post('get-category-byId','CategoriesController@getCategoryById');
-    Route::post('change-category-status','CategoriesController@changeStatus');
+//all routes / api here must be api authenticated
+Route::group(['middleware' => ['api','checkPassword','changeLanguage'], 'namespace' => 'Api'], function () {
+    Route::post('get-main-categories', 'CategoriesController@index');
+    Route::post('get-category-byId', 'CategoriesController@getCategoryById');
+    Route::post('change-category-status', 'CategoriesController@changeStatus');
+
+    Route::group(['prefix' => 'admin','namespace'=>'Admin'],function (){
+        Route::post('login', 'AuthController@login');
+    });
 
 });
 
 
-Route::group(['middleware' => ['api','checkPassword','changeLanguage','checkAdminToken:admin-api'],'namespace'=>'Api'], function () {
 
-Route::get('offers','CategoriesController@index');
-
+Route::group(['middleware' => ['api','checkPassword','changeLanguage','checkAdminToken:admin-api'], 'namespace' => 'Api'], function () {
+    Route::get('offers', 'CategoriesController@index');
 });

@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Traits\GeneralTrait;
 use Closure;
-use Tymon\JWTAuth\JWTAuth;
+// use Tymon\JWTAuth\JWTAuth;
+ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CheckAdminToken
 {
